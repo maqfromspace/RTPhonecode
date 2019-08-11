@@ -6,6 +6,17 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 11-08-2019
+### Добавлено
+- Добавлен слой service
+- Добавлен слой dao
+- Добавлен слой domain
+- Добавлены следующие тесты:
+    - SmokeTest - тестирование загрузки из контекста
+    - HttpRequestTest - тестирование получения запроса типа /rest/code?country=be контроллером
+    - HttpResponseTest - тестирование ответа на запрос типа /rest/code?country=be
+    - JSONHelperTest - тестирование получения JSON JSONHelper'ом
+
 ## [0.0.1] - 11-08-2019
 ### Добавлено
 - Добавлен .gitignore
