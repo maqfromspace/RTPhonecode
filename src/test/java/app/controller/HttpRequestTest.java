@@ -34,5 +34,10 @@ public class HttpRequestTest {
                 .andDo(print())
                 .andExpect(status().isOk())
         ;
+        this.mockMvc
+                .perform(get("/rest/code/upload"))
+                .andDo(print())
+                .andExpect(status().isOk())
+        ;
     }
 }

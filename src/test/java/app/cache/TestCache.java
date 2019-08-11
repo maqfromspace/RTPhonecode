@@ -38,11 +38,11 @@ public class TestCache {
     @Test
     public void testCache() throws Exception {
         //Очистка кэша
-        CacheManager manager = CacheManager.create();
-        manager.clearAll();
+
+        CacheManager.getInstance().clearAll();
 
         //Проверяем, очищен ли кэш
-        Cache cache = manager.getInstance().getCache("jsonhelpercache");
+        Cache cache = CacheManager.getInstance().getCache("jsonhelpercache");
         assertThat(cache.get(countryUrl)).isNull();
         assertThat(cache.get(phoneUrl)).isNull();
 
@@ -82,5 +82,27 @@ public class TestCache {
         Cache cache = CacheManager.getInstance().getCache("jsonhelpercache");
         assertThat(cache.get(countryUrl)).isNotNull();
         assertThat(cache.get(phoneUrl)).isNotNull();
+    }
+
+    @Test
+    public void uploadCache() throws Exception {
+
+        //Очищаем кэш
+        //Проверяем, очищен ли кэш
+        CacheManager.getInstance().clearAll();
+        Cache cache = CacheManager.getInstance().getCache("jsonhelpercache");
+        assertThat(cache.get(countryUrl)).isNull();
+        assertThat(cache.get(phoneUrl)).isNull();
+
+        MvcResult result = this.mockMvc
+                .perform(get("/rest/code/upload"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        //Проверяем, создался ли кэш
+        assertThat(cache.get(countryUrl)).isNotNull();
+        assertThat(cache.get(phoneUrl)).isNotNull();
+
     }
 }

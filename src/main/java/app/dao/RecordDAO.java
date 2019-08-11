@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface RecordDAO {
     List<Record> getRecordsBySubstringCountry(String substring);
+    void uploadCache();
 }

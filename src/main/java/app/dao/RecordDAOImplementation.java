@@ -3,6 +3,7 @@ package app.dao;
 import app.App;
 import app.JSONHelper;
 import app.domain.Record;
+import net.sf.ehcache.CacheManager;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,5 +55,16 @@ public class RecordDAOImplementation implements RecordDAO{
         }
         LOGGER.info("Набор записей создан: " + listOfRecords.toString());
         return listOfRecords;
+    }
+
+    public void uploadCache(){
+        LOGGER.info("RecordDAOImplementation обновляет кэш");
+
+        CacheManager manager = CacheManager.create();
+        manager.clearAll();
+
+        JSONObject countryJSON = new JSONObject(helper.getJsonByURL(countryUrl));
+        JSONObject phoneJSON = new JSONObject(helper.getJsonByURL(phoneUrl));
+        LOGGER.info("RecordDAOImplementation закончил обновления кэша");
     }
 }

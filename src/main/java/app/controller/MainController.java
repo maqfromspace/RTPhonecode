@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.domain.Record;
+import app.service.CacheService;
 import app.service.RecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,16 +21,29 @@ public class MainController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
     @Autowired
-    RecordService service;
+    RecordService recordService;
+
+    @Autowired
+    CacheService cacheService;
 
     @GetMapping
     public ResponseEntity getInfo(@RequestParam(name = "country") String country) throws Exception {
         LOGGER.info("Получен GET запрос GET /rest/code?country=" + country);
         LOGGER.info("MainController обращается к RecordService для полуения записей...");
 
-        List<Record> records = service.getRecordsBySubstringCountry(country);
+        List<Record> records = recordService.getRecordsBySubstringCountry(country);
 
         LOGGER.info("RecordService вернул следующие записи :" + records);
         return ResponseEntity.ok(records);
+    }
+    @GetMapping("/upload")
+    public ResponseEntity getInfo() throws Exception {
+        LOGGER.info("Получен GET запрос GET /rest/code/upload");
+        LOGGER.info("MainController обращается к CacheService для обновления кэша...");
+
+        cacheService.uploadCache();
+
+        LOGGER.info("CacheService успешно обновил кэш");
+        return ResponseEntity.ok("Кэш обновлен");
     }
 }

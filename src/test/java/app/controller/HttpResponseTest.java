@@ -32,7 +32,7 @@ public class HttpResponseTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testHTTPResponse() throws Exception {
+    public void testHTTPResponseCountry() throws Exception {
         MvcResult result = this.mockMvc
                 .perform(get("/rest/code?country=be"))
                 .andDo(print())
