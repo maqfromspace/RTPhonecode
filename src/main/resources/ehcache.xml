@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
+        updateCheck="true"
+        monitoring="autodetect"
+        dynamicConfig="true">
+    <diskStore path="java.io.tmpdir" />
+
+    <cache
+            name="jsonhelpercache"
+            maxElementsInMemory="5"
+            eternal="true"
+            overflowToDisk="true"
+            timeToIdleSeconds="300"
+            timeToLiveSeconds="60000"
+            diskPersistent="true"
+            diskExpiryThreadIntervalSeconds="1"
+            memoryStoreEvictionPolicy="LFU">
+        <cacheEventListenerFactory class="app.config.CacheEventLogger"/>
+    </cache>
+
+</ehcache>
