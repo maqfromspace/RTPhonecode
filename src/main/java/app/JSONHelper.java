@@ -3,6 +3,7 @@ package app;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
@@ -16,6 +17,9 @@ public class JSONHelper {
 
     HttpURLConnection connection;
 
+    @Cacheable(
+            value = "jsonhelpercache",
+            key = "#urlString")
     public String getJsonByURL(String urlString) {
         try {
             LOGGER.info("Начинаем получение JSON с источника " + urlString + "...");

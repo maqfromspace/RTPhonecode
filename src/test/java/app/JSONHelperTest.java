@@ -1,6 +1,5 @@
-package app.jsonhelper;
+package app;
 
-import app.JSONHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;

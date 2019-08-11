@@ -30,6 +30,7 @@ public class HttpResponseTest {
 
     @Autowired
     private MockMvc mockMvc;
+
     @Test
     public void testHTTPResponse() throws Exception {
         MvcResult result = this.mockMvc
